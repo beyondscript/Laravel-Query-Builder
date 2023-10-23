@@ -55,7 +55,7 @@ class Inputtest extends Controller
         $update = DB::table('testinputs') -> where('id', $id)->first();
         return view('update', ['update' => $update]);
     }
-    public function update2(Request $req, $id){
+    public function update2(Request $req){
         $validatedData = $req->validate([
             'text' => ['required', 'string', 'max:255'],
             'number' => ['required', 'integer', 'min:1'],
@@ -74,7 +74,7 @@ class Inputtest extends Controller
         $data = array();
         $image = request()->file('image');
         if($image){
-            $update = DB::table('testinputs') -> where('id', $id)->first();
+            $update = DB::table('testinputs') -> where('id', $req->id)->first();
             $old_image=$update->image;
             if(file_exists($old_image)){
                 unlink($old_image);
@@ -89,23 +89,23 @@ class Inputtest extends Controller
             $data['text'] = $req -> text;
             $data['number'] = $req -> number;
             $data['image'] = $url;
-            DB::table('testinputs') -> where('id', $id)->update($data);
+            DB::table('testinputs') -> where('id', $req->id)->update($data);
             return redirect()->route('view')->with('message','Data successfully updated');
         }
         else{
             $data['text'] = $req -> text;
             $data['number'] = $req -> number;
-            DB::table('testinputs') -> where('id', $id)->update($data);
+            DB::table('testinputs') -> where('id', $req->id)->update($data);
             return redirect()->route('view')->with('message','Data successfully updated');
         }
     }
-    public function delete($id){
-        $delete = DB::table('testinputs') -> where('id', $id)->first();
+    public function delete(Request $req){
+        $delete = DB::table('testinputs') -> where('id', $req->id)->first();
         $image  = $delete->image;
         if(file_exists($image)){
             unlink($image);
         }
-        DB::table('testinputs') -> where('id', $id)->delete();
+        DB::table('testinputs') -> where('id', $req->id)->delete();
         return redirect()->route('view')->with('error','Data successfully deleted');
     }
     
@@ -140,7 +140,7 @@ class Inputtest extends Controller
         $first_tables = DB::table('testinputs') -> get();
         return view('update2', ['update' => $update, 'first_tables' => $first_tables]);
     }
-    public function update4(Request $req, $id){
+    public function update4(Request $req){
         $validatedData = $req->validate([
             'text2' => ['required', 'string', 'max:255'],
             'ti_id' => ['required'],
@@ -155,11 +155,11 @@ class Inputtest extends Controller
         $data = array();
         $data['text2'] = $req -> text2;
         $data['ti_id'] = $req -> ti_id;
-        DB::table('secondtestinputs') -> where('id', $id)->update($data);
+        DB::table('secondtestinputs') -> where('id', $req->id)->update($data);
         return redirect()->route('view2')->with('message','Data successfully updated');
     }
-    public function delete2($id){
-        DB::table('secondtestinputs') -> where('id', $id)->delete();
+    public function delete2(Request $req){
+        DB::table('secondtestinputs') -> where('id', $req->id)->delete();
         return redirect()->route('view2')->with('error','Data successfully deleted');
     }
 }

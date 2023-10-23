@@ -27,9 +27,10 @@
                             @endif
                             <td>
                                 <a class="table_link" href="{{URL::to('/update/data/'.$view->id)}}"><i class="fa fa-edit"></i></a>
-                                <form style="display: inline-flex;" method="post" action="{{URL::to('/delete/data/'.$view->id)}}">
+                                <form style="display: inline-flex;" method="post" action="{{URL::to('/delete/data')}}">
                                     @method('DELETE')
                                     @csrf
+                                    <input type="hidden" name="id" value="{{ $view->id }}">
                                     <button class="table_link"><i class="fa fa-trash"></i></button>
                                 </form>
                             </td>
