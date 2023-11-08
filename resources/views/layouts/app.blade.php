@@ -19,6 +19,9 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 	    <script src="https://cdn.datatables.net/v/bs4/jq-3.6.0/dt-1.13.1/datatables.min.js"></script>
+
+	    @yield('scripts')
+
 		<script>
 		  	@if(Session::has('message'))
 		  		toastr.options =
@@ -52,18 +55,6 @@
 			  	}
 		  		toastr.warning("{{ session('warning') }}");
 		  	@endif
-		</script>
-		<script>
-			$(document).ready( function () {
-			    $('#table').DataTable({
-			    	scrollX: true,
-			    	"pagingType": "simple",
-				    "drawCallback": function( settings ) {
-				        document.getElementById('table_previous').querySelector('a').innerHTML = '<i class="fa fa-angle-left"></i>';
-				        document.getElementById('table_next').querySelector('a').innerHTML = '<i class="fa fa-angle-right"></i>';
-				    }
-			    });
-			});
 		</script>
 	</body>
 </html>
