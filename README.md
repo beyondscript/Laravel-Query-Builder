@@ -4,7 +4,7 @@
 	Laravel Query Builder
 </p>
 
-## About Laravel Query Builder g
+## About Laravel Query Builder
 
 Laravel Query Builder is a web application which was designed by using HTML, CSS and JavaScript and developed by using PHP and Laravel framework.
 
