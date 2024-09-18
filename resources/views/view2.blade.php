@@ -18,8 +18,8 @@
                             <td>{{ $view -> text2}}</td>
                             <td>{{ $view -> text}}</td>
                             <td>
-                                <a class="table_link" href="{{URL::to('/update/data_2/'.$view->id)}}"><i class="fa fa-edit"></i></a>
-                                <form style="display: inline-flex;" method="post" action="{{URL::to('/delete/data_2')}}">
+                                <a class="table_link" href="{{URL::to('/edit-from-second-table/'.$view->id)}}"><i class="fa fa-edit"></i></a>
+                                <form style="display: inline-flex;" method="post" action="{{URL::to('/destroy-from-second-table')}}">
                                     @method('DELETE')
                                     @csrf
                                     <input type="hidden" name="id" value="{{ $view->id }}">
